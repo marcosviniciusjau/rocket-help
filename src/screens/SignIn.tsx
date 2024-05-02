@@ -1,6 +1,8 @@
-import {VStack,Heading,Icon,useTheme} from 'native-base'
+import {VStack,Heading,Icon,useTheme, View} from 'native-base'
 import Logo from '../assets/logo_primary.svg'
 import { Input } from '../components/Input'
+import { faEnvelope, faKey } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
 
 export function SignIn(){
     const {colors}= useTheme()
@@ -15,13 +17,19 @@ export function SignIn(){
            <Input 
              placeholder="Email"
              mb={4}
-             InputLeftElement={<Icon as={<Envelope color={colors.gray[300]}/>} ml={4}/>}
-             />
+             InputLeftElement={
+               <View ml={4}>
+                 <Icon as={<FontAwesomeIcon color={colors.gray[300]} icon={faEnvelope} />} />
+               </View>
+             }/>
            
            <Input 
              placeholder="Senha"
-             InputLeftElement={<Icon as={<Key color={colors.gray[300]}/>} ml={4}/>}
-             secureTextEntry
+             InputLeftElement={
+              <View ml={4}>
+                <Icon as={<FontAwesomeIcon color={colors.gray[300]} icon={faKey} />} />
+              </View>
+            } secureTextEntry
              />
            
         </VStack>

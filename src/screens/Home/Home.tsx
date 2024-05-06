@@ -1,16 +1,37 @@
 import {useState} from 'react';
-import { HStack, Heading, IconButton, Text, VStack,useTheme } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
+import { HStack, Heading, IconButton, Text, VStack,useTheme,FlatList, Center } from 'native-base';
 
-import { faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { faChartBar, faMessage, faSignOut } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import Logo from '../../assets/logo_secondary.svg';
 
 import { Filter } from '../../components/Filter/Filter';
+import { Button } from '../../components/Button';
+import { Order,OrderProps } from '../../components/Order/Order';
 
 export function Home() {
   const [statusSelected, setStatusSelected] = useState<'open' | 'closed'>('open');
+  const [orders,setOrders]= useState<OrderProps[]>([
+    {
+      id: '123',
+      patrimony: '123123',
+      when: '17/08/2022',
+      status: 'open'
+    }
+  ])
+
+  const navigation = useNavigation();
   const { colors } = useTheme();
+
+  function handleNewOrder() {
+    navigation.navigate('new');
+  }
+
+  function handleOpenDetails(orderId: string) {
+    navigation.navigate('details', { orderId });
+  }
 
   return (
     <VStack flex={1} bg="gray.600" pb={6}>
@@ -56,6 +77,25 @@ export function Home() {
           isActive={statusSelected === 'closed'}
           />
       </HStack>
+
+      <FlatList
+        data={orders}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => <Order data={item} onPress={()=>handleOpenDetails(item.id)}/>}
+        showsVerticalScrollIndicator={false}
+        _contentContainerStyle={{paddingBottom: 100}}
+        ListEmptyComponent={() => (
+        <Center>
+          <FontAwesomeIcon icon={faMessage} size={40} color={colors.gray[300]}/>
+          <Text color="gray.300" fontSize="xl" mt={6} textAlign="center">
+            Você ainda não possui {'\n'}
+            solicitações {statusSelected === 'open' ? 'em andamento' : 'finalizadas'}
+          </Text>
+        </Center>
+        )}
+        />
+
+        <Button title="Nova Solicitação" onPress={handleNewOrder}/>
       </VStack>
     </VStack>
   );

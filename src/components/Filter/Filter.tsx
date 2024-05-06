@@ -18,7 +18,7 @@ export function Filter({title, isActive = false, type, ...rest}: Props) {
       variant="outline"
       borderWidth={isActive ? 1 : 0}
       borderColor={colorType}
-      bgColor="gray.400"
+      bgColor="gray.600"
       flex={1}
       size="sm"
       {...rest}
@@ -28,7 +28,8 @@ export function Filter({title, isActive = false, type, ...rest}: Props) {
         color={isActive ? colorType : "gray.300"}
         fontSize="xs"
         textTransform="uppercase"
-      >{title}
+      >
+        {title}
       </Text>
 
     </Button>

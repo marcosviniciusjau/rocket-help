@@ -1,4 +1,4 @@
-rootProject.name = 'rockethelp'
+rootProject.name = 'rocket-help'
 
 dependencyResolutionManagement {
   versionCatalogs {

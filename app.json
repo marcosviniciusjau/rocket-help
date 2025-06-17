@@ -7,6 +7,12 @@
       "**/*"
     ],
     "plugins": [
+<<<<<<< HEAD
+      "expo-font"
+    ],
+    "android": {
+      "package": "com.marcosviniciusjahu.rockethelp"
+=======
       "expo-font",
       "@react-native-firebase/app"
     ],
@@ -17,6 +23,7 @@
     "ios": {
       "bundleIdentifier": "com.rockethelp",
       "googleServicesFile":"./GoogleService-Info.plist"
+>>>>>>> aac4a397acfa2152b1890a79f49c57addc638dc1
     }
   }
 }
